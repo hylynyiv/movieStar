@@ -25,8 +25,6 @@
     },
     methods: {
       addMovie() {
-        // const movies = JSON.parse(localStorage.getItem('movies') || '[]');
-        // movies.push({ id: Date.now(), title: this.newMovie });
         const movie = { id: Date.now(), title: this.newMovie };
         this.movies.push(movie); // Update the component's data
         localStorage.setItem('movies', JSON.stringify(this.movies));
