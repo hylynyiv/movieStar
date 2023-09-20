@@ -9,9 +9,9 @@
 
         <ul v-if="movies && movies.length">
             <li v-for="movie in movies" :key="movie.imdbID">
-               <h3> {{ movie.Title }} ({{ movie.Year }}) </h3>
-               <img :src="movie.Poster" alt="Movie Poster" v-if="movie.Poster !== 'N/A'"/>
-            <button @click="addToWatchList">Add to my watch list</button>
+                <h3> {{ movie.Title }} ({{ movie.Year }}) </h3>
+                <img :src="movie.Poster" alt="Movie Poster" v-if="movie.Poster !== 'N/A'"/>
+                <button @click="addToWatchList(movie)">Add to my watch list</button>
             </li>
         </ul>
         <p v-if="error"> {{ error }}</p>
@@ -48,10 +48,18 @@
                 }catch (error){
                 this.error = "Failed to fetch movies.";
                 }
+            },
+            addToWatchList(movie){
+                let watchlist = JSON.parse(localStorage.getItem('watchlist') || '[]')
+                // Check if the movie already exists in the watchlist 
+                if (!watchlist.some(item => item.imdbID === movie.imdbID)){
+                    movie.watched = false // Track if the movie has been watched
+                    movie.rating = 0; // Initial rating
+                    watchlist.push(movie)
+                    localStorage.setItem('watchlist', JSON.stringify(watchlist));
+                }
             }
-
         }
-
     }
 </script>
 

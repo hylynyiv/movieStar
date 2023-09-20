@@ -1,9 +1,10 @@
 <template>
   <div>
-    <h1>Movies List</h1>
+    <h1>My Favourite Movies</h1>
     <ul>
-      <li v-for="movie in movies" :key="movie.id">
-        {{ movie.title }}
+      <li v-for="movie in favouriteMovies" :key="movie.imdbID">
+        <h3>{{ movie.Title }}</h3>
+        <img :src="movie.Poster" alt="movie poster">
       </li>
     </ul>
   </div>
@@ -11,10 +12,11 @@
 
 <script>
 export default {
-  data() {
-    return {
-      movies: JSON.parse(localStorage.getItem('movies') || '[]')
-    };
+  computed: {
+    favouriteMovies() {
+        const watchlist = JSON.parse(localStorage.getItem('watchlist') || '[]');
+        return watchlist.filter(movie => movie.rating === 3);
+    }
   }
 };
 </script>

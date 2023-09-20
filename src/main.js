@@ -2,13 +2,13 @@ import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue';
 import Home from './components/Home.vue';  
-import MyMovies from './components/MyMovies.vue';
+import WatchList from './components/WatchList.vue';
 import SearchMovie from './components/SearchMovie.vue';
 
 
 const routes = [
   { path: '/', component: Home },
-  { path: '/Movies', component: MyMovies },
+  { path: '/Watchlist', component: WatchList},
   { path: '/Search', component: SearchMovie}
 
 ];
